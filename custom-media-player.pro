@@ -12,6 +12,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+MOC_DIR = $$PWD/.moc
+UI_DIR = $$PWD/.ui
+OBJECTS_DIR = $$PWD/.obj
+DESTDIR = $$PWD/bin
+
+HEADERS += \
+    mymediaplayer.h
+
 SOURCES += \
         main.cpp \
         mymediaplayer.cpp
@@ -28,6 +36,3 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-HEADERS += \
-    mymediaplayer.h
