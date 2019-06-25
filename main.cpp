@@ -16,6 +16,8 @@
 
 #include "mymediaplayer.h"
 
+const QString FILE_NAME = "SampleVideo_360x240_30mb.mp4";
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -35,9 +37,12 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    QString fileName = "SampleVideo_360x240_30mb.mp4";
-    auto filePath = QStandardPaths::locate(QStandardPaths::MoviesLocation, fileName);
-    player.setMedia(QUrl::fromLocalFile(filePath));
+    auto filePath = QStandardPaths::locate(QStandardPaths::MoviesLocation, FILE_NAME);
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        exit(1);
+    }
+    player.setMedia(QMediaContent(), &file);
 
     return app.exec();
 }
